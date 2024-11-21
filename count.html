@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    #countdown {
+      font-size: 2.5rem;
+      color: #333;
+      margin-top: 20%;
+    }
+    .container {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Countdown Timer</h1>
+    <div id="countdown">Loading...</div>
+  </div>
+  <script>
+    // Set the target date and time
+    const targetDate = new Date("December 31, 2024 23:59:59").getTime();
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(() => {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      // Calculate days, hours, minutes, and seconds
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Display the countdown
+      document.getElementById("countdown").innerHTML = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      // If the countdown is finished, stop the timer and display a message
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "Time's up!";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
